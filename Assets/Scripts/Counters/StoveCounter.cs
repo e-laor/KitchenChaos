@@ -70,7 +70,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                         OnStateChange?.Invoke(this, new OnStateChangedEventArgs
                         {
                             state = state
-                        }) ;
+                        });
                     }
                     break;
                 case State.Fried:
@@ -98,9 +98,8 @@ public class StoveCounter : BaseCounter, IHasProgress
                     }
                     break;
                 case State.Burned:
-                        break;
+                    break;
             }
-                        Debug.Log(state);
         }
 
     }
@@ -122,7 +121,7 @@ public class StoveCounter : BaseCounter, IHasProgress
 
                     fryingRecipeSO = GetFryingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
 
-                    state  = State.Frying;
+                    state = State.Frying;
                     fryingTimer = 0f;
 
                     OnStateChange?.Invoke(this, new OnStateChangedEventArgs
@@ -130,7 +129,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                         state = state
                     });
 
-                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = fryingTimer/ fryingRecipeSO.fryingTimerMax });
+                    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = fryingTimer / fryingRecipeSO.fryingTimerMax });
 
                 }
             }
@@ -219,5 +218,10 @@ public class StoveCounter : BaseCounter, IHasProgress
                 return burningRecipeSO;
         }
         return null;
+    }
+
+    public bool IsFried()
+    {
+        return state == State.Fried;
     }
 }
